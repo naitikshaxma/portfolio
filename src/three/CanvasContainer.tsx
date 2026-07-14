@@ -11,7 +11,7 @@ export default function CanvasContainer({ children }: CanvasContainerProps) {
   const setGPUTier = useSystemStore((state) => state.setGPUTier)
 
   return (
-    <div className="absolute inset-0 w-full h-full -z-10 bg-obsidian overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 w-full h-full -z-10 bg-transparent overflow-hidden pointer-events-none">
       <Suspense fallback={null}>
         <Canvas
           camera={{ position: [0, 0, 5], fov: 60 }}

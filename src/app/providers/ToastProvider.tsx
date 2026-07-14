@@ -33,7 +33,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
                       ? 'bg-red-500'
                       : toast.type === 'warning'
                       ? 'bg-yellow-500'
-                      : 'bg-cyber-cyan'
+                      : 'bg-neon-blue'
                   }`}
                 />
                 <span className="text-sm font-mono tracking-tight text-ice-white">

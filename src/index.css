@@ -1,20 +1,26 @@
+@import "./styles/fonts.css";
 @import "tailwindcss";
+@import "./styles/variables.css";
+@import "./styles/animations.css";
+@import "./styles/utilities.css";
+@import "./styles/scrollbar.css";
+@import "./styles/selection.css";
 
 @theme {
-  --color-obsidian: #000000;
-  --color-space-gray: #0B0B0F;
-  --color-charcoal: rgba(255, 255, 255, 0.06);
-  --color-ice-white: #F5F5F7;
-  --color-slate-gray: #8E8E93;
-  --color-cyber-cyan: #00F0FF;
-  --color-stripe-purple: #8B5CF6;
+  --color-obsidian: var(--color-obsidian);
+  --color-space-gray: var(--color-space-gray);
+  --color-charcoal: var(--color-charcoal);
+  --color-ice-white: var(--color-ice-white);
+  --color-neon-blue: var(--color-neon-blue);
+  --color-neon-cyan: var(--color-neon-cyan);
+  --color-neon-purple: var(--color-neon-purple);
 
-  --font-sans: "Geist Sans", "Inter", sans-serif;
-  --font-mono: "Geist Mono", "JetBrains Mono", monospace;
-  --font-display: "Outfit", "Syne", sans-serif;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
 
-  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-base: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-snappy: var(--ease-snappy);
+  --ease-base: var(--ease-base);
 }
 
 @layer base {

@@ -10,14 +10,15 @@ interface CursorProviderProps {
 export function CursorProvider({ children }: CursorProviderProps) {
   const hoverTarget = useSystemStore((state) => state.cursorHoveredTarget)
 
-  // Custom cursor position motion variables
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
 
-  // Spring settings for the outer ring lag effect
-  const springConfig = { stiffness: 400, damping: 28, mass: 0.6 }
-  const ringX = useSpring(cursorX, springConfig)
-  const ringY = useSpring(cursorY, springConfig)
+  const ringTargetX = useMotionValue(-100)
+  const ringTargetY = useMotionValue(-100)
+
+  const springConfig = { stiffness: 350, damping: 26, mass: 0.5 }
+  const ringX = useSpring(ringTargetX, springConfig)
+  const ringY = useSpring(ringTargetY, springConfig)
 
   useEffect(() => {
     if (isMobile()) return
@@ -25,16 +26,34 @@ export function CursorProvider({ children }: CursorProviderProps) {
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
-      // Set global document variables for background spotlights and dynamic shadows
+
+      // Check if hovering a locked element
+      let target = e.target as HTMLElement | null
+      let locked = false
+      
+      while (target && target !== document.documentElement) {
+        if (target.hasAttribute('data-cursor-lock')) {
+          const rect = target.getBoundingClientRect()
+          ringTargetX.set(rect.left + rect.width / 2)
+          ringTargetY.set(rect.top + rect.height / 2)
+          locked = true
+          break
+        }
+        target = target.parentElement
+      }
+
+      if (!locked) {
+        ringTargetX.set(e.clientX)
+        ringTargetY.set(e.clientY)
+      }
+
       document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`)
       document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`)
     }
 
     window.addEventListener('mousemove', handleMouseMove)
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [cursorX, cursorY])
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [cursorX, cursorY, ringTargetX, ringTargetY])
 
   const showCursor = !isMobile()
 
@@ -43,12 +62,12 @@ export function CursorProvider({ children }: CursorProviderProps) {
       {children}
       {showCursor && (
         <>
-          {/* Inner Cyan Dot */}
+          {/* Inner Dot */}
           <motion.div
-            className="fixed top-0 left-0 w-1.5 h-1.5 bg-cyber-cyan rounded-full z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+            className="fixed top-0 left-0 w-1.5 h-1.5 bg-[#00b4d8] rounded-full z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
             style={{ x: cursorX, y: cursorY }}
           />
-          {/* Outer Interactive Ring */}
+          {/* Outer Ring */}
           <motion.div
             className="fixed top-0 left-0 rounded-full border border-white/20 z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
             style={{
@@ -58,8 +77,8 @@ export function CursorProvider({ children }: CursorProviderProps) {
               height: hoverTarget ? 48 : 24,
             }}
             animate={{
-              borderColor: hoverTarget ? '#00F0FF' : 'rgba(255,255,255,0.2)',
-              backgroundColor: hoverTarget ? 'rgba(0, 240, 255, 0.05)' : 'rgba(255,255,255,0)',
+              borderColor: hoverTarget ? '#00b4d8' : 'rgba(255,255,255,0.2)',
+              backgroundColor: hoverTarget ? 'rgba(0, 180, 216, 0.05)' : 'rgba(255,255,255,0)',
             }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           />

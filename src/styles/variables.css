@@ -1,0 +1,16 @@
+:root {
+  --color-obsidian: #0d0f12;
+  --color-space-gray: #1b1e23;
+  --color-charcoal: rgba(255, 255, 255, 0.08);
+  --color-ice-white: #f5f5f7;
+  --color-neon-blue: #00b4d8;
+  --color-neon-cyan: #90e0ef;
+  --color-neon-purple: #7209b7;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Outfit', 'Syne', sans-serif;
+  
+  --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-base: cubic-bezier(0.25, 1, 0.5, 1);
+}

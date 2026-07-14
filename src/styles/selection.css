@@ -1,0 +1,10 @@
+/* Custom selection color */
+::selection {
+  background-color: rgba(0, 180, 216, 0.25);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: rgba(0, 180, 216, 0.25);
+  color: #ffffff;
+}
