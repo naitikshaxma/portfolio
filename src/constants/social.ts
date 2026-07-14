@@ -1,0 +1,5 @@
+export const SOCIAL_LINKS = [
+  { name: 'GitHub', url: 'https://github.com', icon: 'Github' },
+  { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'Linkedin' },
+  { name: 'Twitter', url: 'https://twitter.com', icon: 'Twitter' },
+]

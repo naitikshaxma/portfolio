@@ -1,0 +1,5 @@
+# robots.txt for KRONOS-01
+User-agent: *
+Allow: /
+
+Sitemap: https://kronos-01.dev/sitemap.xml
